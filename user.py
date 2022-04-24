@@ -21,3 +21,26 @@ class User:
     def delete_user(self):
         """function to delete user account"""
         User.user_accounts.remove(self)
+
+    @classmethod
+    def login(cls, username, password):
+        """Verify user credentials"""
+        for user in cls.user_accounts:
+            if user.username == username and user.password == password:
+                return True
+            return False
+    @classmethod
+    def find_user(cls, username):
+        """find user using username"""
+        for user in cls.user_accounts:
+            if user.username == username:
+                return user
+
+    @classmethod
+    def display_user_accounts(cls):
+        """Show all the user accounts in the array"""
+        return cls.user_accounts
+
+    def __repr__(self):
+        """format user print"""
+        return f'Fullname: {self.first_name} {self.last_name} Username: {self.username}'
