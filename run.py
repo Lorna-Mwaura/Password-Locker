@@ -12,8 +12,7 @@ def show_options():
     print("1. Create Account\n2. Login\n3. Display Accounts\n4. Exit")
 
 def create_account_option():
-    print("Please provide the following details to create an account")
-    print('*' * 70)
+    print("Please provide the following details to create an account:")
 
     print("Enter your first name .....")
     first_name = input()
@@ -31,7 +30,7 @@ def create_account_option():
     return user
 
 def user_login():
-    print("Enter your details to login")
+    print("Enter your details to login:")
     print("Enter your username .....")
     username = input()
     print("Enter password .....")
@@ -40,7 +39,7 @@ def user_login():
     return User.login(username, user_password)
 
 def show_password_options():
-    print("Please choose an option to set the password")
+    print("Please choose an option to set the password:")
     print("1. Enter your password\n2. Generate a password")
 
     choice = int(input())
@@ -50,7 +49,7 @@ def show_password_options():
         password = input()
 
     else:
-        print("Please provide the length of the password to be generated")
+        print("Please provide the length of the password to be generated:")
         length = int(input())
         password = Credentials.gernerate_password(length)
         print(f"The generated password is: {password}")
@@ -58,15 +57,15 @@ def show_password_options():
     return password
 
 def display_logged_in_menu():
-    print("Please select an option")
+    print("Please select an option:")
     print("1. Save new credentials\n2. Show all saved credentials\n3. Delete credentials\n4. Logout")
     choice = int(input())
     if choice == 1:
-        print("Save Platform Credentials" +)
+        print("Save Platform Credentials")
         print("Enter platform name eg twitter, instagram")
         platform = input()
 
-        print("Enter platform username eg lona")
+        print("Enter platform username eg lonaw")
         username = input()
 
         password = show_password_options()
@@ -99,16 +98,16 @@ def display_logged_in_menu():
         return True
 
 def main():
-    print("*" + " WELCOME TO PASSWORD LOCK " + "*")
+    print("*" + " HELLO, WELCOME TO PASSWORD-LOCKER " + "*")
     show_options()
 
     while True:
         try:
             choice = int(input())
 
-            if choice is 1:
+            if choice == 1:
                 user = create_account_option()
-                print(f"Welcome to Password Locker {user.username}")
+                print(f"Hello {user.username},")
                 while True:
                     logout = display_logged_in_menu()
                     if logout:
@@ -117,7 +116,7 @@ def main():
 
             elif choice == 2:
                 if user_login():
-                    print(f"Welcome to Password Locker")
+                    print(f"Hello")
                     while True:
                         logout = display_logged_in_menu()
                         if logout:
@@ -140,3 +139,6 @@ def main():
         except:
             print("You selected an invalid option")
             show_options()
+
+if __name__ == '__main__':
+    main()
