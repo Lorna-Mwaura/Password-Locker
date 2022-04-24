@@ -28,5 +28,31 @@ class TestCredentials(unittest.TestCase):
         self.platform.delete_platform_credentials()
         self.assertEqual(len(Credentials.user_passwords), 0)
 
+    def test_platform_exists(self):
+        """test if the platform_exists method returns the correct value"""
+        self.platform.save_platform_credentials()
+        self.assertEqual(Credentials.platform_exists(self.platform.platform), True)
+
+    def test_find_platform_credentials(self):
+        """test if method returns the credentials if platform was provided"""
+        self.platform.save_platform_credentials()
+        self.assertEqual(Credentials.find_platform_credentials(self.platform.platform), self.platform)
+
+    def test_display_all_credentials(self):
+        """test display credentials method if it returns all the saved credentials"""
+        self.platform.save_platform_credentials()
+
+        self.assertEqual(Credentials.display_all_credentials(), Credentials.user_passwords)
+
+    def test_display_all_credentials(self):
+        """test display credentials method if it returns all the saved credentials"""
+        self.platform.save_platform_credentials()
+
+        self.assertEqual(Credentials.display_all_credentials(), Credentials.user_passwords)
+
+    def test_generate_password(self):
+        """test if the generated password length is the one specified"""
+        self.assertEqual(len(Credentials.generate_password(8)), 8)
+
 if __name__ == "__main__":
     unittest.main()
