@@ -1,6 +1,5 @@
 class User:
 
-
     def __init__(self, first_name, last_name, username, password):
         """user constructor"""
         self.first_name = first_name
@@ -10,10 +9,26 @@ class User:
 
     user_accounts = []
 
-    def save_user(self):
-        """Append user to the user accounts lists"""
-        User.user_accounts.append(self)
-
     def delete_user(self):
         """function to delete user account"""
         User.user_accounts.remove(self)
+    
+    @classmethod
+    def login(cls, username):
+        """find user using username"""
+
+        for user in cls.user_accounts:
+            if user.username == username and user.password == password:
+                return True
+            return False
+
+    @classmethod
+    def find_user(cls,username):
+        """find user using username"""
+        for user in cls.user_accounts:
+            if user.username == username:
+                return user
+
+    def save_user(self):
+        """Append user to the user accounts lists"""
+        User.user_accounts.append(self)
