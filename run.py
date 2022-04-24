@@ -38,3 +38,105 @@ def user_login():
     user_password = input()
 
     return User.login(username, user_password)
+
+def show_password_options():
+    print("Please choose an option to set the password")
+    print("1. Enter your password\n2. Generate a password")
+
+    choice = int(input())
+
+    if choice == 1:
+        print("Enter platform password")
+        password = input()
+
+    else:
+        print("Please provide the length of the password to be generated")
+        length = int(input())
+        password = Credentials.gernerate_password(length)
+        print(f"The generated password is: {password}")
+
+    return password
+
+def display_logged_in_menu():
+    print("Please select an option")
+    print("1. Save new credentials\n2. Show all saved credentials\n3. Delete credentials\n4. Logout")
+    choice = int(input())
+    if choice == 1:
+        print("Save Platform Credentials" +)
+        print("Enter platform name eg twitter, instagram")
+        platform = input()
+
+        print("Enter platform username eg lona")
+        username = input()
+
+        password = show_password_options()
+
+        creds = Credentials(platform, username, password)
+        creds.save_platform_credentials()
+
+        print(f"\n\nCredentials for {platform} saved successfully\n\n")
+
+    elif choice == 2:
+        print("Show all saved credentials" + "-")
+        print(Credentials.display_all_credentials())
+        print("\n\n")
+
+    elif choice == 3:
+        print("-"+ "Delete platform credentials" + "-")
+        print("Enter the name of the platform you want to delete")
+
+        delete_patform = input()
+
+        if Credentials.platform_exists(delete_patform):
+            plat = Credentials.find_platform_credentials(delete_patform)
+            plat.delete_platform_credentials()
+            print(f"platform {delete_patform} deleted successfully\n\n")
+        else:
+            print(f"platform {delete_patform} does not exist!")
+
+    elif choice == 4:
+        print("Logging out" + ".")
+        return True
+
+def main():
+    print("*" + " WELCOME TO PASSWORD LOCK " + "*")
+    show_options()
+
+    while True:
+        try:
+            choice = int(input())
+
+            if choice is 1:
+                user = create_account_option()
+                print(f"Welcome to Password Locker {user.username}")
+                while True:
+                    logout = display_logged_in_menu()
+                    if logout:
+                        show_options()
+                        break
+
+            elif choice == 2:
+                if user_login():
+                    print(f"Welcome to Password Locker")
+                    while True:
+                        logout = display_logged_in_menu()
+                        if logout:
+                            show_options()
+                            break
+                else:
+                    print("Account does not exist")
+                    show_options()
+
+            elif choice == 3:
+                print("Registered user accounts")
+                print(User.display_user_accounts())
+                show_options()
+
+
+            elif choice == 4:
+                break
+            else:
+                raise Exception()
+        except:
+            print("You selected an invalid option")
+            show_options()
